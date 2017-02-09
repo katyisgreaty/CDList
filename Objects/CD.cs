@@ -8,11 +8,11 @@ namespace CdList.Objects
     private string _title;
     private int _id;
 
-    public Cd(string cdTitle)
+    public Cd(string title)
     {
-      _title = cdTitle;
+      _title = title;
       _instances.Add(this);
-      _id = instances.Count;
+      _id = _instances.Count;
     }
 
     public string GetTitle()

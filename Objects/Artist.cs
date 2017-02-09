@@ -9,12 +9,12 @@ namespace CdList.Objects
     private int _id;
     private List<Cd> _cds;
 
-    public Artist(string cdName)
+    public Artist(string artistName)
     {
-      _name = cdName;
+      _name = artistName;
       _instances.Add(this);
       _id = _instances.Count;
-      _artists = new List<Artist>{};
+      _cds = new List<Cd>{};
     }
     public string GetName()
     {

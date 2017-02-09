@@ -1,8 +1,8 @@
 using Nancy;
-using Todo.Objects;
+using CdList.Objects;
 using System.Collections.Generic;
 
-namespace CDList
+namespace CdList
 {
   public class HomeModule : NancyModule
   {
@@ -15,7 +15,7 @@ namespace CDList
           var allArtists = Artist.GetAll();
           return View["artists.cshtml", allArtists];
       };
-      Get["/artists_form"] = _ => {
+      Get["/artist_form"] = _ => {
           return View["artist_form.cshtml"];
       };
       Post["/artists"] = _ => {
@@ -23,23 +23,34 @@ namespace CDList
           var allArtists = Artist.GetAll();
           return View["artists.cshtml", allArtists];
       };
-      Get["artists/{id}"] = parameters => {
+      Get["/artists/{id}"] = parameters => {
           Dictionary<string, object> model = new Dictionary<string, object>();
           var selectedArtist = Artist.Find(parameters.id);
           var artistCds = selectedArtist.GetCds();
-          model.Add("artists", selectedArtist);
+          model.Add("artist", selectedArtist);
           model.Add("cds", artistCds);
           return View["artist.cshtml", model];
       };
       Get["/artists/{id}/cds/new"] = parameters => {
           Dictionary<string, object> model = new Dictionary<string, object>();
-          Artist selectedArtist = Artist.Find(paramenters.id);
+          Artist selectedArtist = Artist.Find(parameters.id);
           List<Cd> allCds = selectedArtist.GetCds();
-          model.Add("Artist", selectedArtist);
+          model.Add("artist", selectedArtist);
           model.Add("cds", allCds);
           return View["artist_cds_form.cshtml", model];
       };
-      
+      Post["/cds"] = _ => {
+          Dictionary<string, object> model = new Dictionary<string, object>();
+          Artist selectedArtist = Artist.Find(Request.Form["artist-id"]);
+          List<Cd> artistCds = selectedArtist.GetCds();
+          string cdTitle = Request.Form["cd-title"];
+          Cd newCd = new Cd(cdTitle);
+          artistCds.Add(newCd);
+          model.Add("cds", artistCds);
+          model.Add("artist", selectedArtist);
+          return View["artist.cshtml", model];
+      };
+
     }
   }
 }

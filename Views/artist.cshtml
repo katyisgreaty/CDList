@@ -3,10 +3,13 @@
 }
 
 <h3>Your Artist details:</h3>
+<h4>Your artist is
+    @Model["artist"].GetName()
+</h4>
 <ol>
-@foreach (var artist in @Model["artist"])
+@foreach (var cd in @Model["cds"])
 {
-  <li>@artist.GetName()</li>
+  <li>@cd.GetTitle()</li>
 }
 </ol>
 <p><a href='/artist_form.cshtml'>Add a new artist</a></p>

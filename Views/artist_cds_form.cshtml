@@ -1,0 +1,11 @@
+@{
+  Layout="Shared/_Layout.cshtml";
+}
+
+<h1>Add a new Cd to @Model["artist"].GetName()</h1>
+<form action='/cds' method='post'>
+  <input id='artist-name' name='artist-name' type='hidden' value='@Model["category"].GetId()'>
+  <label for='cd-title'>CD Title</label>
+  <input id='cd-title' name='cd-title' type='text'>
+  <button type='submit'>Add CD</button>
+</form>

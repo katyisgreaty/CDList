@@ -34,8 +34,12 @@ namespace CDList
       Get["/artists/{id}/cds/new"] = parameters => {
           Dictionary<string, object> model = new Dictionary<string, object>();
           Artist selectedArtist = Artist.Find(paramenters.id);
-          List<Cd> 
-      }
+          List<Cd> allCds = selectedArtist.GetCds();
+          model.Add("Artist", selectedArtist);
+          model.Add("cds", allCds);
+          return View["artist_cds_form.cshtml", model];
+      };
+      
     }
   }
 }

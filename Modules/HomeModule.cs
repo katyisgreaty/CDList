@@ -31,6 +31,16 @@ namespace CdList
           model.Add("cds", artistCds);
           return View["artist.cshtml", model];
       };
+
+      Post["/artists/{id}"] = parameters => {
+          Dictionary<string, object> model = new Dictionary<string, object>();
+          var selectedArtist = Artist.Find(parameters.id);
+          selectedArtist.AddCd(new Cd(Request.Form["cd-title"]));
+          var artistCds = selectedArtist.GetCds();
+          model.Add("artist", selectedArtist);
+          model.Add("cds", artistCds);
+          return View["artist.cshtml", model];
+      };
       Get["/artists/{id}/cds/new"] = parameters => {
           Dictionary<string, object> model = new Dictionary<string, object>();
           Artist selectedArtist = Artist.Find(parameters.id);
@@ -50,11 +60,11 @@ namespace CdList
           model.Add("artist", selectedArtist);
           return View["artist.cshtml", model];
       };
-      Get["/artist_cds_form"] = _ => {
+      Get["/artist_cds_form/{id}"] = parameters => {
           Dictionary<string, object> model = new Dictionary<string, object>();
           var selectedArtist = Artist.Find(parameters.id);
           model.Add("artist", selectedArtist);
-          return View["artist_cds_form.cshtml"];
+          return View["artist_cds_form.cshtml", model];
       };
 
     }

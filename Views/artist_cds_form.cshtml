@@ -4,7 +4,7 @@
 
 <h1>Add a new Cd to @Model["artist"].GetName()
 </h1>
-<form action='/artists/@Model["artist"].GetId()/cds/new' method='post'>
+<form action='/artists/@Model["artist"].GetId()' method='post'>
   <label for='cd-title'>CD Title</label>
   <input id='cd-title' name='cd-title' type='text'>
   <button type='submit'>Add CD</button>

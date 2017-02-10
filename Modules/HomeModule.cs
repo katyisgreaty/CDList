@@ -50,6 +50,12 @@ namespace CdList
           model.Add("artist", selectedArtist);
           return View["artist.cshtml", model];
       };
+      Get["/artist_cds_form"] = _ => {
+          Dictionary<string, object> model = new Dictionary<string, object>();
+          var selectedArtist = Artist.Find(parameters.id);
+          model.Add("artist", selectedArtist);
+          return View["artist_cds_form.cshtml"];
+      };
 
     }
   }
